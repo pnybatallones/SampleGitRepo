@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+ 
+    <link rel="stylesheet" href="https://bootswatch.com/4/spacelab/bootstrap.css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <title>Weather App</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <h4 style="color: beige;"><b>Weather App</b></h4>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="PH">
+                  Philippines
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Japan">
+                  Japan
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="US">
+                  United States
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="row justify-content-around" style="margin:auto; width:50%; padding-top: 50px;">
+        <div class="col-6">
+            <img src="<%= country %>" alt="country flag">
+        </div>
+        <div class="col-4">
+            <h1><b><%= name %></b></h1>
+            <h5><%= lat %>&deg; 
+                    <%if (lat < 0) { %> S <%} 
+                        else { %> N <% } %>, 
+                <%= long %>&deg; 
+                    <%if (long < 0) { %> W <%} 
+                        else { %> E <% } %>
+            </h5>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between mt-5" style="margin:auto; width:80%;">        
+        <% for(var i = 0; i < forecast.length; i++) { %>             
+            <div class="text-center">
+                <%if (forecast[i].skytextday == 'Sunny') { %>               
+                    <img class="mb-4" src="https://www.glyphicons.com/img/glyphicons/weather/2x/glyphicons-weather-1-clear@2x.png">                                    
+                <% } %>
+                <%if (forecast[i].skytextday == 'Partly Sunny') { %>               
+                    <img src="https://www.glyphicons.com/img/glyphicons/weather/2x/glyphicons-weather-13-clear-mostly@2x.png">                             
+                <%} %>
+                <%if (forecast[i].skytextday == 'Mostly Sunny') { %>   
+                    <img src="https://www.glyphicons.com/img/glyphicons/weather/2x/glyphicons-weather-1-clear@2x.png">                               
+                <% } %>
+                
+                <%if (forecast[i].skytextday == 'Light Rain') { %>   
+                    <img src="https://www.glyphicons.com/img/glyphicons/weather/2x/glyphicons-weather-6-rain-light@2x.png">                             
+                <% } %> 
+                <%if (forecast[i].skytextday == 'Rain Showers') { %>   
+                    <img src="https://www.glyphicons.com/img/glyphicons/weather/2x/glyphicons-weather-8-rain-heavy@2x.png">                                        
+                <% } %>
+                <%if (forecast[i].skytextday == 'T-Storms') { %> 
+                    <img src="https://www.glyphicons.com/img/glyphicons/weather/2x/glyphicons-weather-9-rain-thunder@2x.png">                            
+                <% } %>                
+              
+                <%if (forecast[i].skytextday == 'Cloudy') { %>   
+                    <img src="https://www.glyphicons.com/img/glyphicons/weather/2x/glyphicons-weather-4-overcast@2x.png">               
+                <% } %>
+                <%if (forecast[i].skytextday == 'Partly Cloudy') { %>                 
+                    <img src="https://www.glyphicons.com/img/glyphicons/weather/2x/glyphicons-weather-12-cloudy-partly@2x.png">  
+                <% } %>
+                <%if (forecast[i].skytextday == 'Mostly Cloudy') { %>     
+                    <img src="https://www.glyphicons.com/img/glyphicons/weather/2x/glyphicons-weather-11-cloudy-mostly@2x.png">                    
+                <% } %>
+                
+                <%if (forecast[i].skytextday == 'Clear') { %>                 
+                    <img src="https://www.glyphicons.com/img/glyphicons/weather/2x/glyphicons-weather-1-clear@2x.png">  
+                <% } %>
+                <%if (forecast[i].skytextday == 'Mostly Clear') { %> 
+                    <img src="https://www.glyphicons.com/img/glyphicons/weather/2x/glyphicons-weather-13-clear-mostly@2x.png">                             
+                <% } 
+                %>
+               
+                
+                <%if (forecast[i].date == current.date){ %>
+                    <h2><b>Today</b></h2> 
+                <% } 
+                else { %> 
+                    <h2><%= forecast[i].day %></h2> 
+                <% } %> 
+
+                <div><%= forecast[i].date %></div>
+                <%if (forecast[i].date == current.date){ %> 
+                    <div><%= current.temperature %>&deg C</div> 
+                <% } 
+                else { %> 
+                    <div><%= (parseFloat(forecast[i].high) + parseFloat(forecast[i].low)) / 2 %>&deg C</div> 
+                <% } %>                
+            </div>
+        <% } %>                
+    </div>
+
+    <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
